@@ -1,29 +1,8 @@
 import { MachineState } from '../../core/models/machine.model';
+import { STATE_ICONS } from '../../core/constants/state-icons.map';
 
 export function stateIcon(state: MachineState | undefined): string {
-  switch (state) {
-    case 'running':
-      return 'check_circle';
-    case 'alarm':
-      return 'error';
-    case 'warning':
-      return 'warning';
-    default:
-      return '';
-  }
-}
-
-export function stateColor(state: MachineState | undefined): string {
-  switch (state) {
-    case 'running':
-      return '#43a047';
-    case 'alarm':
-      return '#e53935';
-    case 'warning':
-      return '#fb8c00';
-    default:
-      return '';
-  }
+  return state ? (STATE_ICONS[state] ?? '') : '';
 }
 
 export function formatDateTime(date: Date): string {

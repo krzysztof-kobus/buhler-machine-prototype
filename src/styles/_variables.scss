@@ -1,11 +1,13 @@
 // Colors
 $color-primary: #007940;
+$color-success: #43a047;
 $color-alarm: #e53935;
 $color-warning: #fb8c00;
-$color-running: #43a047;
-$color-bg: #f5f5f5;
+$color-running: #d0d0d0;
+$color-bg: #e8e8e8;
 $color-surface: #ffffff;
 $color-text: #212121;
+$color-text-white: #ffffff;
 $color-border: #e0e0e0;
 
 // Spacing
@@ -23,3 +25,5 @@ $font-size-xl: 20px;
 $font-size-xxl: 24px;
 $font-weight-normal: 400;
 $font-weight-bold: 600;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.05em;
