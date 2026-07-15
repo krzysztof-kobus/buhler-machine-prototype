@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { MachinesAPIService } from '../core/services/machines-api.service';
+import { MachinesStore } from '../core/store/machines.store';
 import { MachineButtonComponent } from '../shared/machine-button/machine-button.component';
 
 @Component({
@@ -34,8 +34,8 @@ import { MachineButtonComponent } from '../shared/machine-button/machine-button.
   ],
 })
 export class NavigationComponent {
-  private readonly api = inject(MachinesAPIService);
+  private readonly store = inject(MachinesStore);
 
-  protected readonly machines = this.api.machines;
-  protected readonly error = this.api.error;
+  protected readonly machines = this.store.machines;
+  protected readonly error = this.store.error;
 }
