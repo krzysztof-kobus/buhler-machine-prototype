@@ -10,9 +10,7 @@ export class MachinesAPIService {
 
   readonly machinesResource = rxResource<Machine[], void>({
     stream: () =>
-      this.http.get<Machine[]>('/assets/data/machines.json').pipe(
-        retry({ count: 3, delay: 1000 })
-      )
+      this.http.get<Machine[]>('/assets/data/machines.json').pipe(retry({ count: 3, delay: 1000 })),
   });
 
   readonly machines = this.machinesResource.value;
