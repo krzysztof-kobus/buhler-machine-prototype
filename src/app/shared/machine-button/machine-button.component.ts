@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { MachineState } from '../../core/models/machine.model';
+import { MACHINE_ICONS } from '../../core/constants/machine-icons.map';
 import { stateIcon } from '../utils/machine.utils';
 
 @Component({
@@ -10,7 +11,10 @@ import { stateIcon } from '../utils/machine.utils';
   template: `
     <button [class]="btnClass()" [routerLink]="['/machine', id()]" [title]="name()">
       <span class="machine-btn__state-icon material-symbols-outlined">{{ stateIcon(state()) }}</span>
-      {{ name() }}
+      @if (!small()) {
+        <span class="machine-btn__machine-icon material-symbols-outlined">{{ machineIcon() }}</span>
+      }
+      <span class="machine-btn__name">{{ name() }}</span>
     </button>
   `,
   styles: [
@@ -19,20 +23,21 @@ import { stateIcon } from '../utils/machine.utils';
 
       .machine-btn {
         position: relative;
-        width: 120px;
-        height: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: $spacing-sm;
+        width: 140px;
+        height: 140px;
         border: 2px solid transparent;
         font-size: $font-size-lg;
         font-weight: $font-weight-bold;
         cursor: pointer;
         background: $color-bg;
         color: $color-text;
-        padding: 0 $spacing-md;
-        padding-right: $spacing-lg;
+        padding: $spacing-lg $spacing-sm $spacing-sm;
         letter-spacing: $letter-spacing-wide;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
         transition: filter 0.15s ease;
 
         &:hover {
@@ -48,13 +53,32 @@ import { stateIcon } from '../utils/machine.utils';
         color: inherit;
       }
 
-      .machine-btn--small {
-        width: 120px;
-        height: 44px;
+      .machine-btn__machine-icon {
+        font-size: 40px;
+      }
 
-        .machine-btn__state-icon {
-          font-size: $font-size-lg;
+      .machine-btn__name {
+        font-size: $font-size-lg;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+
+      .machine-btn--small {
+        flex-direction: row;
+        width: 140px;
+        height: 44px;
+        padding: 0 calc($spacing-lg + $spacing-xs);
+        font-size: $font-size-base;
+        overflow: hidden;
+
+        .machine-btn__name {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
+
       }
 
       .machine-btn--running {
@@ -83,6 +107,8 @@ export class MachineButtonComponent {
   readonly small = input(false);
 
   protected readonly stateIcon = stateIcon;
+
+  protected readonly machineIcon = computed(() => MACHINE_ICONS[this.id()] ?? '');
 
   protected readonly btnClass = computed(() => {
     const classes = ['machine-btn', `machine-btn--${this.state()}`];
