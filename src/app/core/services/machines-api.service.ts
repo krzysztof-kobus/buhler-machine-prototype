@@ -8,8 +8,8 @@ import { Machine } from '../models/machine.model';
 export class MachinesAPIService {
   private readonly http = inject(HttpClient);
 
-  readonly machinesResource = rxResource({
-    loader: () =>
+  readonly machinesResource = rxResource<Machine[], void>({
+    stream: () =>
       this.http.get<Machine[]>('/assets/data/machines.json').pipe(
         retry({ count: 3, delay: 1000 })
       )
