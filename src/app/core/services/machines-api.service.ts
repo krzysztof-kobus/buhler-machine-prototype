@@ -10,12 +10,12 @@ export class MachinesAPIService {
 
   getMachines(): Observable<Machine[]> {
     return this.http
-      .get<Machine[]>('/assets/data/machines.json')
+      .get<Machine[]>('assets/data/machines.json')
       .pipe(retry({ count: 3, delay: 1000 }));
   }
 
   getMachineDetail(id: string | undefined): Observable<MachineDetail | undefined> {
-    return this.http.get<MachineDetail[]>('/assets/data/machine-details.json').pipe(
+    return this.http.get<MachineDetail[]>('assets/data/machine-details.json').pipe(
       map((details) => details.find((d) => d.id === id)),
       retry({ count: 3, delay: 1000 }),
     );
