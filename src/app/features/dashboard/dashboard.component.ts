@@ -9,14 +9,13 @@ import { TranslatePipe } from '@ngx-translate/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="production-line">
-      @if (error()) {
+      @if (error() && !machines()?.length) {
         <span class="production-line__error">{{ 'errors.failedToLoadMachines' | translate }}</span>
-      } @else {
-        @for (machine of machines(); track machine.id; let last = $last) {
-          <app-machine-button [id]="machine.id" [state]="machine.state" />
-          @if (!last) {
-            <div class="production-line__connector"></div>
-          }
+      }
+      @for (machine of machines(); track machine.id; let last = $last) {
+        <app-machine-button [id]="machine.id" [state]="machine.state" />
+        @if (!last) {
+          <div class="production-line__connector"></div>
         }
       }
     </div>
@@ -27,6 +26,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
       :host {
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         height: 100%;

@@ -1,6 +1,8 @@
 {
   "header.operator": "Operátor",
   "errors.failedToLoadMachines": "Nepodařilo se načíst stroje",
+  "errors.serverUnavailable": "Server není dostupný — zobrazuji poslední známý stav",
+  "errors.retryIn": "Opakuji za",
   "machine.scale": "Váha",
   "machine.bag-attach": "Připínač sáčků",
   "machine.packer": "Plnič",
