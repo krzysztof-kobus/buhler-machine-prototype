@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MachinesStore } from '../core/store/machines.store';
 import { MachineButtonComponent } from '../shared/machine-button/machine-button.component';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navigation',
-  imports: [MachineButtonComponent],
+  imports: [MachineButtonComponent, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <nav class="nav">
       @if (error()) {
-        <span class="nav__error">Failed to load machines</span>
+        <span class="nav__error">{{ 'errors.failedToLoadMachines' | translate }}</span>
       } @else {
         @for (machine of machines(); track machine.id) {
-          <app-machine-button [id]="machine.id" [name]="machine.name" [state]="machine.state" [small]="true" />
+          <app-machine-button [id]="machine.id" [state]="machine.state" [small]="true" />
         }
       }
     </nav>

@@ -4,10 +4,12 @@ import { interval } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { formatDateTime } from '../shared/utils/machine.utils';
+import { TranslatePipe } from '@ngx-translate/core';
+import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.component';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, NavigationComponent],
+  imports: [RouterLink, NavigationComponent, TranslatePipe, LangSwitcherComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <header class="header">
@@ -16,13 +18,14 @@ import { formatDateTime } from '../shared/utils/machine.utils';
           <img src="assets/buhler-logo.svg" alt="Bühler" class="header__logo" />
         </a>
         <div class="header__user">
+          <app-lang-switcher />
           <div class="header__datetime">
             <span class="material-symbols-outlined">schedule</span>
             <span>{{ formattedDateTime() }}</span>
           </div>
           <div class="header__operator">
             <span class="material-symbols-outlined">person</span>
-            <span>Operator</span>
+            <span>{{ 'header.operator' | translate }}</span>
           </div>
         </div>
       </div>
@@ -75,7 +78,7 @@ import { formatDateTime } from '../shared/utils/machine.utils';
         user-select: none;
       }
 
-      .header__operator {
+.header__operator {
         display: flex;
         align-items: center;
         gap: $spacing-xs;

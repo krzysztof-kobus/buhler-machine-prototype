@@ -1,0 +1,8 @@
+{
+  "header.operator": "Operator",
+  "errors.failedToLoadMachines": "Failed to load machines",
+  "machine.scale": "Scale",
+  "machine.bag-attach": "Attacher",
+  "machine.packer": "Packer",
+  "machine.bag-closer": "Closer"
+}

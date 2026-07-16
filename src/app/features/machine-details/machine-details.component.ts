@@ -3,12 +3,13 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { MachinesAPIService } from '../../core/services/machines-api.service';
+import { TranslatePipe } from '@ngx-translate/core';
 import { MACHINE_ICONS } from '../../core/constants/machine-icons.map';
 import { stateIcon } from '../../shared/utils/machine.utils';
 
 @Component({
   selector: 'app-machine-details',
-  imports: [RouterLink],
+  imports: [RouterLink, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="details">
@@ -16,7 +17,7 @@ import { stateIcon } from '../../shared/utils/machine.utils';
         <a class="details__exit material-symbols-outlined" routerLink="/">close</a>
 
         <span class="details__machine-icon material-symbols-outlined">{{ machineIcon() }}</span>
-        <span class="details__name">{{ detail()?.name }}</span>
+        <span class="details__name">{{ 'machine.' + id() | translate }}</span>
 
         <span class="details__state-icon material-symbols-outlined">{{ stateIcon(detail()?.state) }}</span>
 
@@ -128,7 +129,7 @@ export class MachineDetailsComponent {
 
   protected readonly stateIcon = stateIcon;
 
-  private readonly id = toSignal(
+  protected readonly id = toSignal(
     inject(ActivatedRoute).paramMap.pipe(map((p) => p.get('id') ?? undefined)),
   );
 
