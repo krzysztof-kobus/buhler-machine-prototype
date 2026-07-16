@@ -30,6 +30,7 @@ import { stateIcon } from '../../shared/utils/machine.utils';
   styles: [
     `
       @use 'styles/variables' as *;
+      @use 'styles/mixins' as *;
 
       .details {
         display: flex;
@@ -105,21 +106,8 @@ import { stateIcon } from '../../shared/utils/machine.utils';
         }
       }
 
-      .details__card--running {
-        background: $color-running;
-        color: $color-text;
-
-        .details__state-icon { color: $color-success; }
-      }
-
-      .details__card--alarm {
-        background: $color-alarm;
-        color: $color-text-white;
-      }
-
-      .details__card--warning {
-        background: $color-warning;
-        color: $color-text-white;
+      .details__card {
+        @include state-colors('.details__state-icon');
       }
     `,
   ],

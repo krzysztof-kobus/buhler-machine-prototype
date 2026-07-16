@@ -1,0 +1,22 @@
+@use 'variables' as *;
+
+@mixin state-colors($state-icon-selector) {
+  &--running {
+    background: $color-running;
+    color: $color-text;
+
+    #{$state-icon-selector} {
+      color: $color-success;
+    }
+  }
+
+  &--alarm {
+    background: $color-alarm;
+    color: $color-text-white;
+  }
+
+  &--warning {
+    background: $color-warning;
+    color: $color-text-white;
+  }
+}

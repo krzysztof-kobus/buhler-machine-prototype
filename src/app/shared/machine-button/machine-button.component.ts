@@ -21,6 +21,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styles: [
     `
       @use 'styles/variables' as *;
+      @use 'styles/mixins' as *;
 
       .machine-btn {
         position: relative;
@@ -82,21 +83,8 @@ import { TranslatePipe } from '@ngx-translate/core';
 
       }
 
-      .machine-btn--running {
-        background-color: $color-running;
-        color: $color-text;
-
-        .machine-btn__state-icon {
-          color: $color-success;
-        }
-      }
-      .machine-btn--alarm {
-        background-color: $color-alarm;
-        color: $color-text-white;
-      }
-      .machine-btn--warning {
-        background-color: $color-warning;
-        color: $color-text-white;
+      .machine-btn {
+        @include state-colors('.machine-btn__state-icon');
       }
     `,
   ],
