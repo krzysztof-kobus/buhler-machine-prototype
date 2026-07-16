@@ -13,4 +13,5 @@ export const routes: Routes = [
         (m) => m.MachineDetailsComponent,
       ),
   },
+  { path: '**', redirectTo: '' },
 ];

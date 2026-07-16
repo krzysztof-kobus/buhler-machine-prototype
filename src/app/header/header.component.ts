@@ -1,10 +1,10 @@
-import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { interval } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { NavigationComponent } from '../navigation/navigation.component';
 import { formatDateTime } from '../shared/utils/machine.utils';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.component';
 
 @Component({
@@ -89,7 +89,7 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
         user-select: none;
       }
 
-.header__operator {
+      .header__operator {
         display: flex;
         align-items: center;
         gap: $spacing-xs;
@@ -99,10 +99,11 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
   ],
 })
 export class HeaderComponent {
+  private readonly translate = inject(TranslateService);
   private readonly tick = toSignal(interval(1000));
 
   protected readonly formattedDateTime = computed(() => {
     this.tick();
-    return formatDateTime(new Date());
+    return formatDateTime(new Date(), this.translate.currentLang());
   });
 }

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { MachinesStore } from '../../core/store/machines.store';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { formatDateTime } from '../utils/machine.utils';
 
 @Component({
@@ -72,6 +72,7 @@ import { formatDateTime } from '../utils/machine.utils';
 })
 export class NotificationBannerComponent {
   private readonly store = inject(MachinesStore);
+  private readonly translate = inject(TranslateService);
 
   protected readonly error = this.store.error;
   protected readonly lastFetchedAt = this.store.lastFetchedAt;
@@ -79,6 +80,6 @@ export class NotificationBannerComponent {
 
   protected readonly formattedLastFetch = computed(() => {
     const d = this.store.lastFetchedAt();
-    return d ? formatDateTime(d) : '';
+    return d ? formatDateTime(d, this.translate.currentLang()) : '';
   });
 }
