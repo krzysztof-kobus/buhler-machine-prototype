@@ -37,7 +37,10 @@ export class MachinesStore {
   constructor() {
     effect(() => {
       if (this.machinesResource.hasValue()) {
-        const sorted = this.machinesResource.value()?.slice().sort((a, b) => a.order - b.order);
+        const sorted = this.machinesResource
+          .value()
+          ?.slice()
+          .sort((a, b) => a.order - b.order);
         this.lastKnownMachines.set(sorted);
         this.fetchedAt.set(new Date());
         this.retryAt.set(null);

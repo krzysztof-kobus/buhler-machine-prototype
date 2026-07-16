@@ -14,14 +14,24 @@ import { stateIcon } from '../../shared/utils/machine.utils';
   template: `
     <div class="details">
       <div [class]="'details__card details__card--' + detail()?.state">
-        <a class="details__exit material-symbols-outlined" routerLink="/" aria-label="Close">close</a>
+        <a class="details__exit material-symbols-outlined" routerLink="/" aria-label="Close"
+          >close</a
+        >
 
-        <span class="details__machine-icon material-symbols-outlined" aria-hidden="true">{{ machineIcon() }}</span>
+        <span class="details__machine-icon material-symbols-outlined" aria-hidden="true">{{
+          machineIcon()
+        }}</span>
         <span class="details__name">{{ 'machine.' + id() | translate }}</span>
 
-        <span class="details__state-icon material-symbols-outlined" aria-hidden="true">{{ stateIcon(detail()?.state) }}</span>
+        <span class="details__state-icon material-symbols-outlined" aria-hidden="true">{{
+          stateIcon(detail()?.state)
+        }}</span>
 
-        <p class="details__notes" [class.details__notes--empty]="!detail()?.notes" [attr.title]="detail()?.notes">
+        <p
+          class="details__notes"
+          [class.details__notes--empty]="!detail()?.notes"
+          [attr.title]="detail()?.notes"
+        >
           <span>{{ detail()?.notes }}</span>
         </p>
       </div>

@@ -14,5 +14,4 @@ export class MachinesAPIService {
       // timer(5_000).pipe(switchMap(() => throwError(() => new Error('SSE connection lost')))),
     );
   }
-
 }

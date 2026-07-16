@@ -77,7 +77,7 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
       .header__user {
         display: flex;
         align-items: center;
-        gap: $spacing-sm;
+        gap: $spacing-md;
         font-size: $font-size-base;
       }
 
@@ -85,15 +85,22 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
         display: flex;
         align-items: center;
         gap: $spacing-xs;
-        margin-right: $spacing-md;
+        width: 210px;
         user-select: none;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
 
       .header__operator {
         display: flex;
         align-items: center;
         gap: $spacing-xs;
+        width: 100px;
         user-select: none;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
       }
     `,
   ],
