@@ -80,6 +80,6 @@ export class NotificationBannerComponent {
 
   protected readonly formattedLastFetch = computed(() => {
     const d = this.store.lastFetchedAt();
-    return d ? formatDateTime(d, this.translate.currentLang()) : '';
+    return d ? formatDateTime(d, this.translate.currentLang() ?? 'en') : '';
   });
 }

@@ -19,9 +19,7 @@ export class MachinesStore {
   private readonly retryAt = signal<Date | null>(null);
   private readonly tick = toSignal(interval(1000));
 
-  readonly machines = computed(() =>
-    this.lastKnownMachines()?.slice().sort((a, b) => a.order - b.order),
-  );
+  readonly machines = this.lastKnownMachines.asReadonly();
   readonly error = this.machinesResource.error;
   readonly lastFetchedAt = this.fetchedAt.asReadonly();
 
@@ -39,7 +37,8 @@ export class MachinesStore {
   constructor() {
     effect(() => {
       if (this.machinesResource.hasValue()) {
-        this.lastKnownMachines.set(this.machinesResource.value());
+        const sorted = this.machinesResource.value()?.slice().sort((a, b) => a.order - b.order);
+        this.lastKnownMachines.set(sorted);
         this.fetchedAt.set(new Date());
         this.retryAt.set(null);
       }

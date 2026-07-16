@@ -104,6 +104,6 @@ export class HeaderComponent {
 
   protected readonly formattedDateTime = computed(() => {
     this.tick();
-    return formatDateTime(new Date(), this.translate.currentLang());
+    return formatDateTime(new Date(), this.translate.currentLang() ?? 'en');
   });
 }
