@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { rxResource, toSignal } from '@angular/core/rxjs-interop';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { MachinesAPIService } from '../../core/services/machines-api.service';
+import { MachinesStore } from '../../core/store/machines.store';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MACHINE_ICONS } from '../../core/constants/machine-icons.map';
 import { stateIcon } from '../../shared/utils/machine.utils';
@@ -113,7 +113,7 @@ import { stateIcon } from '../../shared/utils/machine.utils';
   ],
 })
 export class MachineDetailsComponent {
-  private readonly api = inject(MachinesAPIService);
+  private readonly store = inject(MachinesStore);
 
   protected readonly stateIcon = stateIcon;
 
@@ -121,11 +121,6 @@ export class MachineDetailsComponent {
     inject(ActivatedRoute).paramMap.pipe(map((p) => p.get('id') ?? undefined)),
   );
 
-  private readonly detailResource = rxResource({
-    params: this.id,
-    stream: ({ params }) => this.api.getMachineDetail(params),
-  });
-
-  protected readonly detail = this.detailResource.value;
+  protected readonly detail = computed(() => this.store.machineById(this.id())());
   protected readonly machineIcon = computed(() => MACHINE_ICONS[this.id() ?? ''] ?? '');
 }

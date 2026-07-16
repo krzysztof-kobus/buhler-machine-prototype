@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { concat, map, Observable, switchMap, throwError, timer } from 'rxjs';
+import { concat, Observable, switchMap, throwError, timer } from 'rxjs';
 import { Machine } from '../models/machine.model';
 
 @Injectable({ providedIn: 'root' })
@@ -15,9 +15,4 @@ export class MachinesAPIService {
     );
   }
 
-  getMachineDetail(id: string | undefined): Observable<Machine | undefined> {
-    return this.http
-      .get<Machine[]>('assets/data/machines.json')
-      .pipe(map((machines) => machines.find((m) => m.id === id)));
-  }
 }

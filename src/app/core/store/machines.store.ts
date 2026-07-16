@@ -1,6 +1,6 @@
 import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { rxResource, toSignal } from '@angular/core/rxjs-interop';
-import { interval, timer } from 'rxjs';
+import { interval } from 'rxjs';
 import { Machine } from '../models/machine.model';
 import { MachinesAPIService } from '../services/machines-api.service';
 
@@ -25,6 +25,10 @@ export class MachinesStore {
   readonly error = this.machinesResource.error;
   readonly lastFetchedAt = this.fetchedAt.asReadonly();
 
+  machineById(id: string | undefined) {
+    return computed(() => this.lastKnownMachines()?.find((m) => m.id === id));
+  }
+
   readonly retryCountdown = computed(() => {
     const retryAt = this.retryAt();
     if (!retryAt) return null;
@@ -41,11 +45,16 @@ export class MachinesStore {
       }
     });
 
-    effect((onCleanup) => {
+    effect(() => {
       if (this.error()) {
         this.retryAt.set(new Date(Date.now() + RETRY_DELAY_MS));
-        const sub = timer(RETRY_DELAY_MS).subscribe(() => this.machinesResource.reload());
-        onCleanup(() => sub.unsubscribe());
+      }
+    });
+
+    effect(() => {
+      if (this.retryCountdown() === 0 && this.error()) {
+        this.retryAt.set(null);
+        this.machinesResource.reload();
       }
     });
   }

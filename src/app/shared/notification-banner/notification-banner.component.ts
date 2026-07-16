@@ -77,7 +77,8 @@ export class NotificationBannerComponent {
   protected readonly lastFetchedAt = this.store.lastFetchedAt;
   protected readonly retryCountdown = this.store.retryCountdown;
 
-  protected readonly formattedLastFetch = computed(() =>
-    formatDateTime(this.store.lastFetchedAt()!),
-  );
+  protected readonly formattedLastFetch = computed(() => {
+    const d = this.store.lastFetchedAt();
+    return d ? formatDateTime(d) : '';
+  });
 }
