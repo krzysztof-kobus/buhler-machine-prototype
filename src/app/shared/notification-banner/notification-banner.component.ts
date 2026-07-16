@@ -9,7 +9,7 @@ import { formatDateTime } from '../utils/machine.utils';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     <div class="notification-banner" [class.notification-banner--visible]="error()">
-      <span class="material-symbols-outlined">cloud_off</span>
+      <span class="material-symbols-outlined" aria-hidden="true">cloud_off</span>
       <div class="notification-banner__text">
         <span>{{ 'errors.serverUnavailable' | translate }}</span>
         @if (lastFetchedAt()) {

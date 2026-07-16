@@ -20,11 +20,11 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
         <div class="header__user">
           <app-lang-switcher />
           <div class="header__datetime">
-            <span class="material-symbols-outlined">schedule</span>
+            <span class="material-symbols-outlined" aria-hidden="true">schedule</span>
             <span>{{ formattedDateTime() }}</span>
           </div>
           <div class="header__operator">
-            <span class="material-symbols-outlined">person</span>
+            <span class="material-symbols-outlined" aria-hidden="true">person</span>
             <span>{{ 'header.operator' | translate }}</span>
           </div>
         </div>

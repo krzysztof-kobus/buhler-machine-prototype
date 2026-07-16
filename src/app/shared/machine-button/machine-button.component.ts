@@ -10,13 +10,14 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [RouterLink, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <button [class]="btnClass()" [routerLink]="['/machine', id()]" [title]="'machine.' + id() | translate">
-      <span class="machine-btn__state-icon material-symbols-outlined">{{ stateIcon(state()) }}</span>
+    <a [class]="btnClass()" [routerLink]="['/machine', id()]"
+       [attr.aria-label]="('machine.' + id() | translate) + ' — ' + state()">
+      <span class="machine-btn__state-icon material-symbols-outlined" aria-hidden="true">{{ stateIcon(state()) }}</span>
       @if (!small()) {
-        <span class="machine-btn__machine-icon material-symbols-outlined">{{ machineIcon() }}</span>
+        <span class="machine-btn__machine-icon material-symbols-outlined" aria-hidden="true">{{ machineIcon() }}</span>
       }
       <span class="machine-btn__name">{{ 'machine.' + id() | translate }}</span>
-    </button>
+    </a>
   `,
   styles: [
     `
@@ -38,6 +39,7 @@ import { TranslatePipe } from '@ngx-translate/core';
         cursor: pointer;
         background: $color-bg;
         color: $color-text;
+        text-decoration: none;
         padding: $spacing-lg $spacing-sm $spacing-sm;
         letter-spacing: $letter-spacing-wide;
         transition: filter 0.15s ease;

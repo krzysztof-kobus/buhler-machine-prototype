@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-lang-switcher',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <select class="lang-switcher" [value]="currentLang()" (change)="onLangChange($event)">
+    <select class="lang-switcher" [value]="currentLang()" (change)="onLangChange($event)" aria-label="Language">
       <option value="en">EN</option>
       <option value="cs">CS</option>
     </select>
