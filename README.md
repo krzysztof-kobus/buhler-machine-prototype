@@ -1,59 +1,38 @@
-# BuhlerMachinePrototype
+# Buhler Machine Prototype
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.0.6.
+Angular 22 SPA for monitoring a production line of industrial machines. Built as a showcase for the Buhler applicant test.
 
-## Development server
+## Baseline functionality
 
-To start a local development server, run:
+- Dashboard showing 4 machines (Scale, Attacher, Packer, Closer) connected in a production line
+- Three machine states with visual feedback: running, alarm, warning
+- Machine detail view with notes, state icon, and close navigation
+- Navigation bar with compact machine buttons
+- Header with logo, live clock, and operator label
+- Responsive layout (800x600 desktop card, full viewport on mobile)
 
-```bash
-ng serve
+## Extras
+
+- **i18n** — English and Czech via ngx-translate with a language switcher
+- **Resilience** — notification banner on server unavailability with auto-retry countdown, last known state caching
+- **CI/CD** — automated deployment to GitHub Pages
+- **Zoneless** — uses `provideZonelessChangeDetection()` and Angular Signals throughout
+- **Accessibility** — `aria-label`, `aria-hidden` on decorative icons, semantic `<a>` for navigation
+
+## Simulating network error
+
+In `src/app/core/services/machines-api.service.ts`, uncomment the SSE disconnect line:
+
+```ts
+timer(5_000).pipe(switchMap(() => throwError(() => new Error('SSE connection lost')))),
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+This will trigger a simulated disconnect 5 seconds after data loads, showing the notification banner with retry countdown.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Development
 
 ```bash
-ng generate component component-name
+ng serve        # dev server at http://localhost:4200
+ng test         # run unit tests (Vitest)
+ng build        # production build
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
