@@ -53,10 +53,21 @@ import { LangSwitcherComponent } from '../shared/lang-switcher/lang-switcher.com
         align-items: center;
         border-bottom: 3px solid $color-primary;
         padding: $spacing-md $spacing-lg;
+
+        @media (max-width: $breakpoint-md) {
+          flex-wrap: wrap;
+          gap: $spacing-sm;
+          padding: $spacing-sm $spacing-md;
+        }
       }
 
       .header__logo-link {
         display: flex;
+
+        @media (max-width: $breakpoint-md) {
+          flex: 1 0 100%;
+          justify-content: center;
+        }
       }
 
       .header__logo {

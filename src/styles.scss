@@ -17,4 +17,8 @@ body {
   justify-content: center;
   align-items: flex-start;
   padding: $spacing-xl;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0;
+  }
 }

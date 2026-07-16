@@ -30,12 +30,23 @@ import { TranslatePipe } from '@ngx-translate/core';
         align-items: center;
         justify-content: center;
         height: 100%;
+
+        @media (max-width: $breakpoint-md) {
+          height: auto;
+          align-items: flex-start;
+        }
       }
 
       .production-line {
         display: flex;
         align-items: center;
         padding: $spacing-xl;
+
+        @media (max-width: $breakpoint-md) {
+          flex-direction: column;
+          padding: $spacing-lg;
+          width: 100%;
+        }
       }
 
       .production-line__connector {
@@ -43,6 +54,11 @@ import { TranslatePipe } from '@ngx-translate/core';
         height: 3px;
         background: $color-primary;
         flex-shrink: 0;
+
+        @media (max-width: $breakpoint-md) {
+          width: 3px;
+          height: 32px;
+        }
       }
 
       .production-line__error {
