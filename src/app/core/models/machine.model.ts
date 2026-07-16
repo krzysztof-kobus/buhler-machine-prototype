@@ -5,4 +5,5 @@ export interface Machine {
   name: string;
   state: MachineState;
   order: number;
+  notes: string | null;
 }

@@ -1,6 +1,18 @@
 [
-  { "id": "scale",      "name": "Scale",    "state": "running", "order": 1 },
-  { "id": "bag-attach", "name": "Attacher", "state": "alarm",   "order": 2 },
-  { "id": "packer",     "name": "Packer",   "state": "running", "order": 3 },
-  { "id": "bag-closer", "name": "Closer",   "state": "warning", "order": 4 }
+  { "id": "scale", "name": "Scale", "state": "running", "order": 1, "notes": "Stabilized" },
+  {
+    "id": "bag-attach",
+    "name": "Attacher",
+    "state": "alarm",
+    "order": 2,
+    "notes": "Bag attachment failure — sensor not detecting bag position correctly. Manual inspection required."
+  },
+  { "id": "packer", "name": "Packer", "state": "running", "order": 3, "notes": "Stabilized" },
+  {
+    "id": "bag-closer",
+    "name": "Closer",
+    "state": "warning",
+    "order": 4,
+    "notes": "Sealing temperature below threshold — heater element may need replacement. Production slowed."
+  }
 ]
